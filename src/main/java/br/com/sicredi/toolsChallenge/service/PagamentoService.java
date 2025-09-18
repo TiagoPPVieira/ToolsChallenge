@@ -39,6 +39,11 @@ public class PagamentoService {
     public Optional<TransacaoEntity> findById(String id) {
         return repository.findById(id);
     }
+    public Optional<TransacaoEntity> findAndDeleteById(String id) {
+        Optional<TransacaoEntity> transacaoEntity = repository.findById(id);
+        repository.deleteById(id);
+        return transacaoEntity;
+    }
 
     public List<TransacaoEntity> findAll() {
         return repository.findAll();

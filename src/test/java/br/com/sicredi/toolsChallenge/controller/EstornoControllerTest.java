@@ -55,7 +55,7 @@ public class EstornoControllerTest {
 
     @Test
     void shouldReturnTransacaoWhenIdExists() throws Exception {
-        when(pagamentoService.findById("456")).thenReturn(Optional.of(transacaoEntity));
+        when(pagamentoService.findAndDeleteById("456")).thenReturn(Optional.of(transacaoEntity));
 
         mockMvc.perform(get("/api/estorno/456")
                         .accept(MediaType.APPLICATION_JSON))
@@ -65,7 +65,7 @@ public class EstornoControllerTest {
 
     @Test
     void shouldReturnNotFoundWhenIdDoesNotExist() throws Exception {
-        when(pagamentoService.findById("999")).thenReturn(Optional.empty());
+        when(pagamentoService.findAndDeleteById("999")).thenReturn(Optional.empty());
 
         mockMvc.perform(get("/api/estorno/999")
                         .accept(MediaType.APPLICATION_JSON))

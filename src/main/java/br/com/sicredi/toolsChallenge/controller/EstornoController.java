@@ -26,7 +26,7 @@ public class EstornoController {
             @ApiResponse(responseCode = "500", description = "Erro interno do servidor")
     })
     public ResponseEntity<TransacaoEntity> findById(@PathVariable String id){
-        return pagamentoService.findById(id)
+        return pagamentoService.findAndDeleteById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
