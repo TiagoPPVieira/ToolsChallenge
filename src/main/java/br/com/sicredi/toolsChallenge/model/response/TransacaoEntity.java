@@ -8,6 +8,9 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static br.com.sicredi.toolsChallenge.util.AuthorizationCodeGenerator.getCodigoAutorizacao;
 import static br.com.sicredi.toolsChallenge.util.NsuGenerator.getNsu;
 import static br.com.sicredi.toolsChallenge.model.commons.enums.Status.getStatus;
@@ -24,18 +27,21 @@ public class TransacaoEntity {
     @Embedded
     private FormaPagamento formaPagamento;
 
+    public TransacaoEntity() {
+    }
+
     public TransacaoEntity(TransacaoRequest transacaoRequest) {
         this.cartao = transacaoRequest.getCartao();
         this.id = transacaoRequest.getId();
         this.formaPagamento = transacaoRequest.getFormaPagamento();
 
         descricao = DescricaoResponse.builder()
-                .estabelecimento(transacaoRequest.getDescricaoRequest().getEstabelecimento())
-                .valor(transacaoRequest.getDescricaoRequest().getValor())
-                .dataHora(transacaoRequest.getDescricaoRequest().getDataHora())
+                .estabelecimento(transacaoRequest.getDescricao().getEstabelecimento())
+                .valor(transacaoRequest.getDescricao().getValor())
+                .dataHora(String.valueOf(transacaoRequest.getDescricao().getDataHora()))
                 .nsu(getNsu())
                 .codigoAutorizacao(getCodigoAutorizacao())
-                .status(getStatus(transacaoRequest.getDescricaoRequest().getValor()))
+                .status(getStatus(transacaoRequest.getDescricao().getValor()))
                 .build();
     }
 }

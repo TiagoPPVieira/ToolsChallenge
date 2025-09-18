@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Setter
 @Getter
 @Builder
@@ -17,7 +19,7 @@ public class DescricaoRequest {
     private String valor;
     @NotNull(message = "O campo 'dataHora' é obrigatório")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    private String dataHora;
+    private LocalDateTime dataHora;
     @NotBlank(message = "O campo 'estabelecimento' é obrigatório")
     private String estabelecimento;
 }

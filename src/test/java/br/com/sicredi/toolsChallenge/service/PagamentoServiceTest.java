@@ -16,6 +16,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,7 +52,7 @@ public class PagamentoServiceTest {
     public void buildTransaction(){
         descricaoRequestOk = DescricaoRequest.builder()
                 .valor("100.00")
-                .dataHora("17/09/2025 18:30:00")
+                .dataHora(LocalDateTime.parse("17/09/2025 18:30:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")))
                 .estabelecimento("Petshop Mundo Cão")
                 .build();
         formaPagamentoAVista = FormaPagamento.builder()

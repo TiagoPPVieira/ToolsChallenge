@@ -8,6 +8,8 @@ import br.com.sicredi.toolsChallenge.model.request.TransacaoRequest;
 import br.com.sicredi.toolsChallenge.model.response.TransacaoEntity;
 import br.com.sicredi.toolsChallenge.service.PagamentoService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,6 +18,9 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static br.com.sicredi.toolsChallenge.model.commons.enums.PaymentType.AVISTA;
 import static org.mockito.ArgumentMatchers.any;
@@ -35,8 +40,6 @@ public class PagamentoControllerTest {
     @InjectMocks
     private PagamentoController pagamentoController;
 
-    private ObjectMapper objectMapper;
-
     private PagamentoRequest pagamentoRequest;
     private PagamentoResponse pagamentoResponse;
 
@@ -44,11 +47,10 @@ public class PagamentoControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(pagamentoController).build();
-        objectMapper = new ObjectMapper();
 
         DescricaoRequest descricaoRequest = DescricaoRequest.builder()
                 .valor("100.00")
-                .dataHora("18/09/2025 12:00:00")
+                .dataHora(LocalDateTime.parse("17/09/2025 18:30:00", DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")))
                 .estabelecimento("Petshop Mundo Cão")
                 .build();
 
@@ -67,6 +69,10 @@ public class PagamentoControllerTest {
     @Test
     void shouldCreatePagamentoSuccessfully() throws Exception {
         when(pagamentoService.pay(any(PagamentoRequest.class))).thenReturn(pagamentoResponse);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         mockMvc.perform(post("/api/payments")
                         .contentType(MediaType.APPLICATION_JSON)

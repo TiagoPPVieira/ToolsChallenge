@@ -15,4 +15,16 @@ public class DescricaoResponse {
     private String nsu;
     private String codigoAutorizacao;
     private String status;
+
+    public DescricaoResponse() {
+    }
+
+    public DescricaoResponse(String valor, String dataHora, String estabelecimento, String nsu, String codigoAutorizacao, String status) {
+        this.valor = valor;
+        this.dataHora = dataHora;
+        this.estabelecimento = estabelecimento;
+        this.nsu = nsu;
+        this.codigoAutorizacao = codigoAutorizacao;
+        this.status = status;
+    }
 }

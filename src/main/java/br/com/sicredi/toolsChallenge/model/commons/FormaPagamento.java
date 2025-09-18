@@ -18,8 +18,16 @@ public class FormaPagamento {
     private PaymentType tipo;
     @NotBlank(message = "O campo 'parcelas' é obrigatório")
     @Pattern(
-            regexp = "^(0[1-9]|[1-9][0-9])$",
+            regexp = "^(0?[1-9]|[1-9][0-9])$",
             message = "O campo parcelas deve ser um número inteiro maior ou igual a 1"
     )
     private String parcelas;
+
+    public FormaPagamento() {
+    }
+
+    public FormaPagamento(PaymentType tipo, String parcelas) {
+        this.tipo = tipo;
+        this.parcelas = parcelas;
+    }
 }

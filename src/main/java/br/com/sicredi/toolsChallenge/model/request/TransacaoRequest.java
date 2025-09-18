@@ -14,7 +14,7 @@ public class TransacaoRequest {
     @NotBlank(message = "O campo 'id' é obrigatório")
     private String id;
     @Valid
-    private DescricaoRequest descricaoRequest;
+    private DescricaoRequest descricao;
     @Valid
     private FormaPagamento formaPagamento;
 }
