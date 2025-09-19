@@ -27,9 +27,9 @@ public class PagamentoService {
 
         TransacaoEntity transacaoEntity = new TransacaoEntity(pagamentoRequest.transacao());
 
-        repository.findById(transacaoEntity.getId()).ifPresent(t -> {
-                            throw new IdTransacaoDuplicadoException("Id: " + t.getId() + " já existe na base de dados.");
-                        });
+        if (repository.existsById(transacaoEntity.getId())) {
+            throw new IdTransacaoDuplicadoException("Id: " + transacaoEntity.getId() + " já existe na base de dados.");
+        }
 
         repository.save(transacaoEntity);
 

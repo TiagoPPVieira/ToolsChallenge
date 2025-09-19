@@ -75,7 +75,7 @@ public class PagamentoServiceTest {
         PagamentoRequest request = new PagamentoRequest(transacaoRequest);
 
         when(avistaPagamento.supports(AVISTA)).thenReturn(true);
-        when(repository.findById("456")).thenReturn(Optional.empty());
+        when(repository.existsById("456")).thenReturn(false);
 
         PagamentoResponse response = pagamentoService.pay(request);
 
@@ -89,7 +89,7 @@ public class PagamentoServiceTest {
         TransacaoRequest transacaoRequest = new TransacaoRequest("123", "456", descricaoRequestOk, formaPagamentoParcLj);
 
         when(parcLojaPagamento.supports(PARCELADO_LOJA)).thenReturn(true);
-        when(repository.findById("456")).thenReturn(Optional.empty());
+        when(repository.existsById("456")).thenReturn(false);
 
         PagamentoRequest request = new PagamentoRequest(transacaoRequest);
 
@@ -105,7 +105,7 @@ public class PagamentoServiceTest {
         TransacaoRequest transacaoRequest = new TransacaoRequest("123", "456", descricaoRequestOk, formaPagamentoParcEmissor);
 
         when(parcEmissorPagamento.supports(PARCELADO_EMISSOR)).thenReturn(true);
-        when(repository.findById("456")).thenReturn(Optional.empty());
+        when(repository.existsById("456")).thenReturn(false);
 
         PagamentoRequest request = new PagamentoRequest(transacaoRequest);
 

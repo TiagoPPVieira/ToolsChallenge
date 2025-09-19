@@ -94,6 +94,4 @@ Além disso, o projeto contempla:
 
 * Poderia ser adicionada autenticação como o JWT para robustez em produção.
 
-Att: Tiago Vieira.
-
 ---
