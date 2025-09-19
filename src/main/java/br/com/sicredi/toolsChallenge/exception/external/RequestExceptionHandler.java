@@ -18,13 +18,12 @@ public class RequestExceptionHandler {
             Owner4xxException ex,
             HttpServletRequest request) {
 
-        Map<String, Object> body = Map.of(
-                "timestamp", LocalDateTime.now(),
-                "status", HttpStatus.BAD_REQUEST.value(),
-                "error", "Bad Request",
-                "message", ex.getMessage(),
-                "path", request.getRequestURI()
-        );
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("path", request.getRequestURI());
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("error", "Bad Request");
+        body.put("message", ex.getMessage());
 
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)

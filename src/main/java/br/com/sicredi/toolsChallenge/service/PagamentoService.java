@@ -23,7 +23,7 @@ public class PagamentoService {
         strategies.stream()
                 .filter(s -> s.supports(pagamentoRequest.transacao().getFormaPagamento().getTipo()))
                 .findFirst()
-                .orElseThrow(() -> new TipoPagamentoNaoSuportadoException("Unsupported payment type"));
+                .orElseThrow(() -> new TipoPagamentoNaoSuportadoException("Tipo de pagamento não suportado"));
 
         TransacaoEntity transacaoEntity = new TransacaoEntity(pagamentoRequest.transacao());
 
