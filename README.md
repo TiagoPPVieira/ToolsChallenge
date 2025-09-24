@@ -8,20 +8,6 @@
 
 ---
 
-## 📞 Contatos
-
-👤 **Nome:** Tiago Peres Prestes Vieira
-
-🔗 **LinkedIn:** [linkedin.com/in/tiago-peres-prestes-vieira](https://www.linkedin.com/in/tiago-peres-prestes-vieira/)
-
-💻 **GitHub:** [github.com/TiagoPPVieira](https://github.com/TiagoPPVieira)
-
-✉️ **E-mail:** [tiagoppvieira@gmail.com](mailto:tiagoppvieira@gmail.com)
-
-📱 **Telefone / WhatsApp:** [+55 (53) 99177-3037](https://wa.me/5553991773037)
-
----
-
 ## 📝 Descrição
 
 Projeto desenvolvido como parte do **desafio técnico** da **A.R.Phoenix** em parceria com o **Banco Sicredi**, simulando cenários reais de **pagamentos, estornos e consultas de transações financeiras**.
@@ -46,7 +32,7 @@ Além disso, o projeto contempla:
 ## ⚙️ Tecnologias Utilizadas
 
 - **Java 17**
-- **Spring Boot 3** (Web, Validation)
+- **Spring Boot 3**
 - **SpringDoc OpenAPI (Swagger UI)**
 - **JUnit 5 / Mockito**
 - **JaCoCo** (mínimo 75% de cobertura)
@@ -55,20 +41,109 @@ Além disso, o projeto contempla:
 
 ---
 
-## 🌟 Diferenciais Abordados
+## 📖 Endpoints Principais
 
-- Boas práticas de **código limpo e seguro**
-- Uso do **design pattern Strategy** como exemplo de abordagem arquitetural
+### 📌 Pagamento
+**POST** `/api/payments`  
+#### ➡️ Cria um pagamento  
+✔️ **200 – Pagamento criado com sucesso**
 
----
+```json
+{
+  "transacaoEntity": {
+    "cartao": "string",
+    "id": "string",
+    "descricao": {
+      "valor": "41.74",
+      "dataHora": "2025-09-24T19:31:48.276Z",
+      "estabelecimento": "string",
+      "nsu": "string",
+      "codigoAutorizacao": "string",
+      "status": "string"
+    },
+    "formaPagamento": {
+      "tipo": "AVISTA",
+      "parcelas": "04"
+    }
+  }
+}
+```
 
-## 📖 Documentação da API
+### 📌 Estorno
 
-- **Swagger UI:**  
-  Após subir o projeto, acesse no navegador:  
-  👉 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+**GET** `/api/estorno/{id}`
+#### ➡️ Estorna um pagamento pelo ID
+✔️ 200 – Pagamento estornado com sucesso
 
----
+```json
+{
+  "cartao": "string",
+  "id": "string",
+  "descricao": {
+    "valor": "string",
+    "dataHora": "string",
+    "estabelecimento": "string",
+    "nsu": "string",
+    "codigoAutorizacao": "string",
+    "status": "string"
+  },
+  "formaPagamento": {
+    "tipo": "AVISTA",
+    "parcelas": "04"
+  }
+}
+```
+
+### 📌 Consultas
+
+**GET** `/api/consulta`
+#### ➡️ Lista todos os pagamentos
+✔️ 200 – Pagamentos encontrados
+
+```json
+[
+  {
+    "cartao": "string",
+    "id": "string",
+    "descricao": {
+      "valor": "string",
+      "dataHora": "string",
+      "estabelecimento": "string",
+      "nsu": "string",
+      "codigoAutorizacao": "string",
+      "status": "string"
+    },
+    "formaPagamento": {
+      "tipo": "AVISTA",
+      "parcelas": "51"
+    }
+  }
+]
+```
+
+
+**GET** `/api/consulta/{id}`
+#### ➡️ Consulta um pagamento pelo ID
+✔️ 200 – Pagamento encontrado
+
+```json
+{
+  "cartao": "string",
+  "id": "string",
+  "descricao": {
+    "valor": "string",
+    "dataHora": "string",
+    "estabelecimento": "string",
+    "nsu": "string",
+    "codigoAutorizacao": "string",
+    "status": "string"
+  },
+  "formaPagamento": {
+    "tipo": "AVISTA",
+    "parcelas": "90"
+  }
+}
+```
 
 ## 📊 Testes e Cobertura
 
